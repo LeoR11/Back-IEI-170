@@ -1,0 +1,27 @@
+{% extends "plantilla_base.html" %}
+{% load bootstrap5 %}
+
+{% block titulo %}Iniciar Sesión{% endblock %}
+
+{% block cabecera %}Iniciar Sesión{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            
+            {% bootstrap_form form %}
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                Tu nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.
+            </div>
+            {% endif %}
+            
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a href="{% url 'password_reset' %}" class="btn btn-link">¿Olvidaste tu contraseña?</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
